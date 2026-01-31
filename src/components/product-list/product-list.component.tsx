@@ -1,4 +1,4 @@
-import ProductCard from '@/components/product-card'
+import ProductCard from '@/components/product-list/product-card'
 import { PRODUCT_LIST } from '@/components/product-list/product-list.constant.ts'
 
 const ProductList = () => {

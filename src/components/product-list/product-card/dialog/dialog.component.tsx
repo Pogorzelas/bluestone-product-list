@@ -1,5 +1,5 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import type { DialogProps } from '@/components/dialog/dialog.types.ts'
+import type { DialogProps } from '@/components/product-list/product-card/dialog/dialog.types.ts'
 
 const Dialog = ({ trigger, title, children, open, onOpenChange }: DialogProps) => (
   <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
