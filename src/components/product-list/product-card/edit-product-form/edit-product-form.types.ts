@@ -1,16 +1,8 @@
-type ProductFormData = {
-  name: string
-  number: string
-  description: string
-  images: {
-    url: string
-    name: string
-  }[]
-}
+import type { Product } from '../../product-list.types'
 
 type EditProductFormProps = {
-  defaultValues: ProductFormData
-  onSubmit: (data: ProductFormData) => void
+  defaultValues: Product
+  onSubmit: (data: Product) => void
 }
 
-export type { ProductFormData, EditProductFormProps }
+export type { EditProductFormProps }

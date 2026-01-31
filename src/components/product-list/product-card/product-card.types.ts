@@ -1,13 +1,8 @@
-type ProductImage = {
-  url: string
-  name: string
-}
+import type { Product } from '../product-list.types.ts'
 
 type ProductCardProps = {
-  name: string
-  number: string
-  description: string
-  images: ProductImage[]
+  product: Product
+  onEdit: (data: Product) => void
 }
 
 export type { ProductCardProps }
