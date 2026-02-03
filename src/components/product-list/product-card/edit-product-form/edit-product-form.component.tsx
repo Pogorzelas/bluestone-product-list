@@ -2,6 +2,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import TextareaInputController from '@/components/product-list/product-card/edit-product-form/textarea-input-controller'
 import type { Product } from '../../product-list.types.ts'
 import type { EditProductFormProps } from './edit-product-form.types.ts'
+import ImageArrayController from './images-fields'
 import TextInputController from './text-input-controller'
 
 const EditProductForm = ({ defaultValues, onSubmit }: EditProductFormProps) => {
@@ -22,7 +23,12 @@ const EditProductForm = ({ defaultValues, onSubmit }: EditProductFormProps) => {
           label="Product Number"
           placeholder="Enter product number"
         />
-        <TextareaInputController<Product> name="description" label="Product Description" />
+        <TextareaInputController<Product>
+          name="description"
+          label="Product Description"
+          placeholder="Enter product description"
+        />
+        <ImageArrayController />
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition-colors"
