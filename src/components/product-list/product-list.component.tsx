@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useLocalStorage } from '@uidotdev/usehooks'
 import ProductCard from './product-card'
 import { PRODUCT_LIST } from './product-list.constant.ts'
 import type { Product } from './product-list.types.ts'
 
 const ProductList = () => {
-  const [products, setProducts] = useState(PRODUCT_LIST)
+  const [products, setProducts] = useLocalStorage('product-list', PRODUCT_LIST)
 
   const handleEdit = (index: number) => (product: Product) => {
     setProducts((previousProducts) => {
