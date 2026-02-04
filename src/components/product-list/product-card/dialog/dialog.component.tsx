@@ -17,6 +17,9 @@ const Dialog = ({ trigger, title, children, open, onOpenChange }: DialogProps) =
               <span className="sr-only">Close</span>
             </DialogPrimitive.Close>
           </div>
+          <DialogPrimitive.Description className="sr-only">
+            Form to edit product information
+          </DialogPrimitive.Description>
           <div className="px-10 pb-10 overflow-y-auto">{children}</div>
         </div>
       </DialogPrimitive.Content>
