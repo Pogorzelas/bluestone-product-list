@@ -2,7 +2,7 @@ import { useFieldArray } from 'react-hook-form'
 import type { Product } from '@/components/product-list/product-list.types.ts'
 import TextInputController from '../text-input-controller'
 
-const ImageArrayController = () => {
+const ImagesFields = () => {
   const { fields, append, remove } = useFieldArray<Product, 'images'>({
     name: 'images',
   })
@@ -49,4 +49,4 @@ const ImageArrayController = () => {
   )
 }
 
-export default ImageArrayController
+export default ImagesFields
