@@ -60,5 +60,6 @@ test.describe('Product Management Flow', () => {
     // Verify the product name was updated (number should stay same)
     const updatedProduct = page.getByTestId('product-card').first()
     await expect(updatedProduct.getByTestId('product-number')).toHaveText(originalNumber || '')
+    await expect(updatedProduct).toContainText('Updated Product Name')
   })
 })
