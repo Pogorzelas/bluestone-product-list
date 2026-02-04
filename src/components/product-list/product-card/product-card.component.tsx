@@ -9,8 +9,12 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
   const image = product.images[0]
 
   const handleSubmit = (newProduct: Product) => {
-    onEdit(newProduct)
-    setIsOpen(false)
+    try {
+      onEdit(newProduct)
+      setIsOpen(false)
+    } catch (error) {
+      //handle error
+    }
   }
 
   return (
