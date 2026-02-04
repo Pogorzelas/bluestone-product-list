@@ -14,10 +14,18 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
   }
 
   return (
-    <div className="rounded-lg border bg-card text-card-foreground shadow-sm flex flex-col">
+    <div
+      className="rounded-lg border bg-card text-card-foreground shadow-sm flex flex-col"
+      data-testid="product-card"
+    >
       {image && <img src={image.url} alt={image.name} className="w-full h-48 rounded-t-lg" />}
       <div className="flex flex-col space-y-1.5 p-6">
-        <div className="text-2xl font-semibold leading-none tracking-tight">{product.number}</div>
+        <div
+          className="text-2xl font-semibold leading-none tracking-tight"
+          data-testid="product-number"
+        >
+          {product.number}
+        </div>
         <div className="text-sm text-muted-foreground">{product.name}</div>
       </div>
       <div className="p-6 pt-0 flex-grow">
@@ -29,6 +37,7 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
             <button
               type="button"
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              data-testid="product-edit-button"
             >
               Edit
             </button>
