@@ -10,8 +10,9 @@ describe('ProductCard', () => {
 
     render(<ProductCard product={mockProduct} onEdit={onEdit} />)
 
-    const image = screen.getByRole('img')
-    expect(image).toBeVisible()
+    const images = screen.getAllByRole('img')
+
+    expect(images[0]).toBeVisible()
   })
 
   it('should not display image when product has no images', () => {

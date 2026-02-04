@@ -3,11 +3,11 @@ import type { Product } from '../product-list.types.ts'
 import Dialog from './dialog'
 import EditProductForm from './edit-product-form'
 import type { ProductCardProps } from './product-card.types.ts'
+import ProductCarousel from './product-carousel'
 
 const ProductCard = ({ product, onEdit }: ProductCardProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-  const image = product.images[0]
 
   const handleSubmit = (newProduct: Product) => {
     try {
@@ -32,9 +32,7 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
       className="rounded-xl bg-white flex flex-col border border-gray-200 shadow-md"
       data-testid="product-card"
     >
-      {image && (
-        <img src={image.url} alt={image.name} className="w-full h-64 object-cover rounded-t-xl" />
-      )}
+      {product.images.length > 0 && <ProductCarousel images={product.images} />}
       <div className="flex flex-col space-y-1.5 p-8">
         <div
           className="text-xl font-bold text-gray-900 mb-2 leading-none"
@@ -62,13 +60,14 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
           open={isOpen}
           onOpenChange={handleOpenChange}
         >
-          <EditProductForm defaultValues={product} onSubmit={handleSubmit} />
-          {errorMessage && (
-            <div className="border-l-2 border-red-600 bg-red-50/50 text-red-600 px-4 py-3 rounded text-sm mt-1">
-              <p className="font-medium">Error</p>
-              <p className="mt-1">{errorMessage}</p>
-            </div>
-          )}
+          <EditProductForm defaultValues={product} onSubmit={handleSubmit}>
+            {errorMessage && (
+              <div className="border-l-2 border-red-600 bg-red-50/50 text-red-600 px-4 py-3 rounded text-sm mt-1">
+                <p className="font-medium">Error</p>
+                <p className="mt-1">{errorMessage}</p>
+              </div>
+            )}
+          </EditProductForm>
         </Dialog>
       </div>
     </div>

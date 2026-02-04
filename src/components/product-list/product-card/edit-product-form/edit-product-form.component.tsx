@@ -7,7 +7,7 @@ import type { EditProductFormProps } from './edit-product-form.types.ts'
 import ImagesFields from './images-fields'
 import TextInputController from './text-input-controller'
 
-const EditProductForm = ({ defaultValues, onSubmit }: EditProductFormProps) => {
+const EditProductForm = ({ defaultValues, onSubmit, children }: EditProductFormProps) => {
   const formMethods = useForm<Product>({
     defaultValues,
     resolver: zodResolver(productSchema),
@@ -33,9 +33,10 @@ const EditProductForm = ({ defaultValues, onSubmit }: EditProductFormProps) => {
           placeholder="Enter product description"
         />
         <ImagesFields />
+        {children}
         <button
           type="submit"
-          className="w-full bg-black hover:bg-gray-800 text-white font-medium py-3.5 px-4 rounded-lg transition-colors duration-200 tracking-wide mt-8"
+          className="w-full bg-black hover:bg-gray-800 text-white font-medium py-3.5 px-4 rounded-lg transition-colors duration-200 tracking-wide"
           data-testid="product-form-submit"
         >
           Save

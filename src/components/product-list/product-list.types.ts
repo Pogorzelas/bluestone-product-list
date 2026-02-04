@@ -10,4 +10,4 @@ type Product = {
   images: ProductImage[]
 }
 
-export type { Product }
+export type { Product, ProductImage }
