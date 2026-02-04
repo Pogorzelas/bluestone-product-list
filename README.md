@@ -116,7 +116,25 @@ bluestone-product-list/
 │   ├── main.tsx                   # Application entry point
 │   └── index.css                  # Global styles
 └── tests                          # E2E tests
+```
 
+### Component Structure
+
+Components in this project follow a consistent structure:
+
+- **File Naming**: `component-name.component.tsx` for component files
+- **Type Definitions**: `component-name.types.ts` for TypeScript types
+- **Exports**: `index.ts` for clean imports
+- **Tests**: Co-located `component-name.test.tsx` files
+- **Organization**: Features are grouped in directories (e.g., `product-list/`)
+
+**Example structure:**
+```
+product-card/
+├── product-card.component.tsx    # Main component
+├── product-card.types.ts         # TypeScript types
+├── product-card.test.tsx         # Unit tests
+└── index.tsx                     # Export
 ```
 
 ## Features in Detail
