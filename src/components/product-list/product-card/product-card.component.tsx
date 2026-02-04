@@ -2,7 +2,6 @@ import { useState } from 'react'
 import type { Product } from '../product-list.types.ts'
 import Dialog from './dialog'
 import EditProductForm from './edit-product-form'
-import ErrorMessage from './error-message'
 import type { ProductCardProps } from './product-card.types.ts'
 
 const ProductCard = ({ product, onEdit }: ProductCardProps) => {
@@ -64,7 +63,12 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
           onOpenChange={handleOpenChange}
         >
           <EditProductForm defaultValues={product} onSubmit={handleSubmit} />
-          <ErrorMessage message={errorMessage} />
+          {errorMessage && (
+            <div className="border-l-2 border-red-600 bg-red-50/50 text-red-600 px-4 py-3 rounded text-sm mt-1">
+              <p className="font-medium">Error</p>
+              <p className="mt-1">{errorMessage}</p>
+            </div>
+          )}
         </Dialog>
       </div>
     </div>

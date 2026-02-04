@@ -8,14 +8,17 @@ const ImagesFields = () => {
   })
 
   return (
-    <div className="flex flex-col gap-2">
-      <span className="block text-xs uppercase tracking-wider text-gray-600 mb-2">
+    <div className="flex flex-col">
+      <span className="block text-xs uppercase tracking-wider text-gray-600 mb-3">
         Product Images
       </span>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {fields.map((field, index) => (
-          <div key={field.id} className="flex gap-2 p-4 border border-gray-200 rounded-lg bg-white">
-            <div className="flex-1 space-y-2">
+          <div
+            key={field.id}
+            className="flex gap-3 p-5 border border-gray-200 rounded-lg bg-gray-50/30"
+          >
+            <div className="flex-1 space-y-4">
               <TextInputController<Product>
                 name={`images.${index}.name`}
                 label="Image Name"
@@ -30,9 +33,10 @@ const ImagesFields = () => {
             <button
               type="button"
               onClick={() => remove(index)}
-              className="self-start px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-lg transition-colors"
+              className="self-start w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-200 rounded-full transition-all flex-shrink-0"
+              aria-label="Remove image"
             >
-              Remove
+              ✕
             </button>
           </div>
         ))}
@@ -40,7 +44,7 @@ const ImagesFields = () => {
       <button
         type="button"
         onClick={() => append({ name: '', url: '' })}
-        className="self-start px-4 py-2 text-sm text-black hover:bg-gray-100 border border-gray-300 rounded-lg transition-colors"
+        className="mt-4 self-start px-5 py-2.5 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100 border border-gray-300 rounded-lg transition-colors"
       >
         + Add Image
       </button>
