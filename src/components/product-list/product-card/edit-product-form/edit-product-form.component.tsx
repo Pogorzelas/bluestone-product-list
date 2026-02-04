@@ -1,6 +1,8 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import TextareaInputController from '@/components/product-list/product-card/edit-product-form/textarea-input-controller'
 import type { Product } from '../../product-list.types.ts'
+import { productSchema } from './edit-product-form.schema.ts'
 import type { EditProductFormProps } from './edit-product-form.types.ts'
 import ImagesFields from './images-fields'
 import TextInputController from './text-input-controller'
@@ -8,6 +10,8 @@ import TextInputController from './text-input-controller'
 const EditProductForm = ({ defaultValues, onSubmit }: EditProductFormProps) => {
   const formMethods = useForm<Product>({
     defaultValues,
+    resolver: zodResolver(productSchema),
+    reValidateMode: 'onBlur',
   })
 
   return (
