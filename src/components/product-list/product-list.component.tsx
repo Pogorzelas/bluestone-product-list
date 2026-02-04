@@ -5,8 +5,8 @@ const ProductList = () => {
   const [products, setProduct] = useProductList()
 
   return (
-    <div className="container mx-auto p-6 max-w-[400px]">
-      <h1 className="text-3xl font-bold mb-6">Products</h1>
+    <div className="container mx-auto p-8 max-w-[480px]">
+      <h1 className="text-4xl font-light text-gray-900 mb-6">Products</h1>
       <div className="flex flex-col gap-6">
         {products.map((product, index) => (
           <ProductCard

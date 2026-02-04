@@ -16,7 +16,7 @@ const EditProductForm = ({ defaultValues, onSubmit }: EditProductFormProps) => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={formMethods.handleSubmit(onSubmit)} className="space-y-1">
+      <form onSubmit={formMethods.handleSubmit(onSubmit)} className="space-y-6">
         <TextInputController<Product>
           name="name"
           label="Product Name"
@@ -35,7 +35,7 @@ const EditProductForm = ({ defaultValues, onSubmit }: EditProductFormProps) => {
         <ImagesFields />
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition-colors"
+          className="w-full bg-black hover:bg-gray-800 text-white font-medium py-3.5 px-4 rounded-lg transition-colors duration-200 tracking-wide mt-8"
           data-testid="product-form-submit"
         >
           Save

@@ -4,7 +4,7 @@ const ErrorMessage = ({ message }: ErrorMessageProps) => {
   if (!message) return null
 
   return (
-    <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-md text-sm">
+    <div className="border-l-2 border-red-600 bg-red-50/50 text-red-600 px-4 py-3 rounded text-sm">
       <p className="font-medium">Error</p>
       <p className="mt-1">{message}</p>
     </div>

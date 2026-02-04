@@ -30,28 +30,30 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
 
   return (
     <div
-      className="rounded-lg border bg-card text-card-foreground shadow-sm flex flex-col"
+      className="rounded-xl bg-white flex flex-col border border-gray-200 shadow-md"
       data-testid="product-card"
     >
-      {image && <img src={image.url} alt={image.name} className="w-full h-48 rounded-t-lg" />}
-      <div className="flex flex-col space-y-1.5 p-6">
+      {image && (
+        <img src={image.url} alt={image.name} className="w-full h-64 object-cover rounded-t-xl" />
+      )}
+      <div className="flex flex-col space-y-1.5 p-8">
         <div
-          className="text-2xl font-semibold leading-none tracking-tight"
+          className="text-xl font-bold text-gray-900 mb-2 leading-none"
           data-testid="product-number"
         >
           {product.number}
         </div>
-        <div className="text-sm text-muted-foreground">{product.name}</div>
+        <div className="text-base font-medium text-gray-700">{product.name}</div>
       </div>
-      <div className="p-6 pt-0 flex-grow">
-        <p className="text-gray-700">{product.description}</p>
+      <div className="px-8 pb-6 pt-4 flex-grow">
+        <p className="text-sm text-gray-600 leading-relaxed">{product.description}</p>
       </div>
-      <div className="flex items-center p-6 pt-0">
+      <div className="flex items-center px-8 pb-8 pt-0">
         <Dialog
           trigger={
             <button
               type="button"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              className="px-6 py-2.5 border border-black text-black bg-transparent rounded-lg hover:bg-black hover:text-white transition-all duration-200 text-sm font-medium uppercase tracking-wider"
               data-testid="product-edit-button"
             >
               Edit

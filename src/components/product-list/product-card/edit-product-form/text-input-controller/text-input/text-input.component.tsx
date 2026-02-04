@@ -4,17 +4,17 @@ import type { TextInputProps } from './text-input.types.ts'
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({ label, errorMessage, name, className = '', ...props }, ref) => (
     <div className="flex flex-col gap-1">
-      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="block text-xs uppercase tracking-wider text-gray-600 mb-2">
         {label}
       </label>
       <input
         ref={ref}
         id={name}
         name={name}
-        className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+        className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors text-base text-gray-700 ${
           errorMessage
-            ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-            : 'border-gray-300'
+            ? 'border-red-500 focus:border-red-500'
+            : 'border-gray-200 focus:border-black'
         } ${className}`}
         {...props}
       />
