@@ -2,18 +2,29 @@ import { useState } from 'react'
 import type { Product } from '../product-list.types.ts'
 import Dialog from './dialog'
 import EditProductForm from './edit-product-form'
+import ErrorMessage from './error-message'
 import type { ProductCardProps } from './product-card.types.ts'
 
 const ProductCard = ({ product, onEdit }: ProductCardProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const image = product.images[0]
 
   const handleSubmit = (newProduct: Product) => {
     try {
+      setErrorMessage('')
       onEdit(newProduct)
       setIsOpen(false)
     } catch (error) {
-      //handle error
+      setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred')
+    }
+  }
+
+  const handleOpenChange = (newOpenState: boolean) => {
+    setIsOpen(newOpenState)
+
+    if (!newOpenState) {
+      setErrorMessage('')
     }
   }
 
@@ -48,9 +59,10 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
           }
           title="Edit Product"
           open={isOpen}
-          onOpenChange={setIsOpen}
+          onOpenChange={handleOpenChange}
         >
           <EditProductForm defaultValues={product} onSubmit={handleSubmit} />
+          <ErrorMessage message={errorMessage} />
         </Dialog>
       </div>
     </div>

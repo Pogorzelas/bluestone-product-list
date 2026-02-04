@@ -104,4 +104,153 @@ describe('ProductCard', () => {
 
     expect(onEdit).not.toHaveBeenCalled()
   })
+
+  it('should display error message when onEdit throws an error', async () => {
+    const user = userEvent.setup()
+    const onEdit = vi.fn(() => {
+      throw new Error('Unable to save. Please reduce the amount of data or clear existing storage.')
+    })
+
+    render(<ProductCard product={mockProduct} onEdit={onEdit} />)
+
+    await user.click(screen.getByRole('button', { name: /edit/i }))
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeVisible()
+    })
+
+    const nameInput = screen.getByLabelText(/product name/i)
+    await user.clear(nameInput)
+    await user.type(nameInput, 'Modified Name')
+
+    const saveButton = screen.getByRole('button', { name: /save/i })
+    await user.click(saveButton)
+
+    expect(onEdit).toHaveBeenCalled()
+    expect(screen.getByText(/error/i)).toBeVisible()
+    expect(
+      screen.getByText(
+        /unable to save\. please reduce the amount of data or clear existing storage\./i,
+      ),
+    ).toBeVisible()
+  })
+
+  it('should keep dialog open when error occurs', async () => {
+    const user = userEvent.setup()
+    const onEdit = vi.fn(() => {
+      throw new Error('Test error')
+    })
+
+    render(<ProductCard product={mockProduct} onEdit={onEdit} />)
+
+    await user.click(screen.getByRole('button', { name: /edit/i }))
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeVisible()
+    })
+
+    const nameInput = screen.getByLabelText(/product name/i)
+    await user.clear(nameInput)
+    await user.type(nameInput, 'Modified Name')
+
+    const saveButton = screen.getByRole('button', { name: /save/i })
+    await user.click(saveButton)
+
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeVisible()
+    })
+  })
+
+  it('should clear error message when dialog is closed', async () => {
+    const user = userEvent.setup()
+    const onEdit = vi.fn(() => {
+      throw new Error('Test error')
+    })
+
+    render(<ProductCard product={mockProduct} onEdit={onEdit} />)
+
+    await user.click(screen.getByRole('button', { name: /edit/i }))
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeVisible()
+    })
+
+    const nameInput = screen.getByLabelText(/product name/i)
+    await user.clear(nameInput)
+    await user.type(nameInput, 'Modified Name')
+
+    const saveButton = screen.getByRole('button', { name: /save/i })
+    await user.click(saveButton)
+
+    expect(screen.getByText(/test error/i)).toBeVisible()
+
+    const closeButton = screen.getByRole('button', { name: /close/i })
+    await user.click(closeButton)
+
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    })
+
+    await user.click(screen.getByRole('button', { name: /edit/i }))
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeVisible()
+    })
+
+    expect(screen.queryByText(/test error/i)).not.toBeInTheDocument()
+  })
+
+  it('should clear error message on successful submit after previous error', async () => {
+    const user = userEvent.setup()
+    let shouldFail = true
+    const onEdit = vi.fn(() => {
+      if (shouldFail) {
+        throw new Error('Test error')
+      }
+    })
+
+    render(<ProductCard product={mockProduct} onEdit={onEdit} />)
+
+    await user.click(screen.getByRole('button', { name: /edit/i }))
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeVisible()
+    })
+
+    const nameInput = screen.getByLabelText(/product name/i)
+    await user.clear(nameInput)
+    await user.type(nameInput, 'Modified Name')
+
+    const saveButton = screen.getByRole('button', { name: /save/i })
+    await user.click(saveButton)
+
+    expect(screen.getByText(/test error/i)).toBeVisible()
+
+    shouldFail = false
+    await user.clear(nameInput)
+    await user.type(nameInput, 'Another Name')
+    await user.click(saveButton)
+
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    })
+  })
+
+  it('should display generic error message for non-Error exceptions', async () => {
+    const user = userEvent.setup()
+    const onEdit = vi.fn(() => {
+      throw 'String error'
+    })
+
+    render(<ProductCard product={mockProduct} onEdit={onEdit} />)
+
+    await user.click(screen.getByRole('button', { name: /edit/i }))
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeVisible()
+    })
+
+    const nameInput = screen.getByLabelText(/product name/i)
+    await user.clear(nameInput)
+    await user.type(nameInput, 'Modified Name')
+
+    const saveButton = screen.getByRole('button', { name: /save/i })
+    await user.click(saveButton)
+
+    expect(screen.getByText(/an unexpected error occurred/i)).toBeVisible()
+  })
 })

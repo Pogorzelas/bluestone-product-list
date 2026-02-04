@@ -16,29 +16,27 @@ const useProductList = () => {
   })
 
   const setProduct = (index: number) => (product: Product) => {
-    setProducts((previousProducts) => {
-      const updatedProducts = [...previousProducts]
+    const updatedProducts = [...products]
+    updatedProducts[index] = product
 
-      updatedProducts[index] = product
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedProducts))
+      setProducts(updatedProducts)
+    } catch (error) {
+      const isMaximumSizeExceeded =
+        error instanceof DOMException &&
+        (error.name === 'QuotaExceededError' ||
+          // Safari / iOS
+          error.name === 'NS_ERROR_DOM_QUOTA_REACHED')
 
-      try {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedProducts))
-      } catch (error) {
-        const isMaximumSizeExceeded =
-          error instanceof DOMException &&
-          (error.name === 'QuotaExceededError' ||
-            // Safari / iOS
-            error.name === 'NS_ERROR_DOM_QUOTA_REACHED')
-
-        if (isMaximumSizeExceeded) {
-          throw new Error(`Maximum size exceeded. Please save smaller content.`)
-        }
-
-        throw new Error('Unexpected error occurred.')
+      if (isMaximumSizeExceeded) {
+        throw new Error(
+          'Unable to save. Please reduce the amount of data or clear existing storage.',
+        )
       }
 
-      return updatedProducts
-    })
+      throw new Error('Unexpected error occurred.')
+    }
   }
 
   return [products, setProduct] as const
