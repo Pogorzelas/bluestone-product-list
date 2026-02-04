@@ -11,8 +11,8 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
 
   const handleSubmit = (newProduct: Product) => {
     try {
-      setErrorMessage('')
       onEdit(newProduct)
+      setErrorMessage('')
       setIsOpen(false)
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred')
@@ -57,7 +57,7 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
             </button>
           }
           title="Edit Product"
-          open={isOpen}
+          isOpen={isOpen}
           onOpenChange={handleOpenChange}
         >
           <EditProductForm defaultValues={product} onSubmit={handleSubmit}>

@@ -43,7 +43,7 @@ const ProductCarousel = ({ images }: ProductCarouselProps) => {
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex">
           {imagesWithIds.map((image) => (
-            <CarouselImage key={image.id} url={image.url} alt={image.name} />
+            <CarouselImage key={image.id} url={image.url} name={image.name} />
           ))}
         </div>
       </div>

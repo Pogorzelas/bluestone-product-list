@@ -4,8 +4,8 @@ type DialogProps = {
   trigger: ReactNode
   title: string
   children: ReactNode
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
+  isOpen?: boolean
+  onOpenChange?: (newOpenState: boolean) => void
 }
 
 export type { DialogProps }

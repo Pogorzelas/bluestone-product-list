@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import type { CarouselImageProps } from './carousel-image.types'
+import type { ProductImage } from '@/components/product-list/product-list.types.ts'
 import CarouselImagePlaceholder from './carousel-image-placeholder'
 
-const CarouselImage = ({ url, alt }: CarouselImageProps) => {
+const CarouselImage = ({ url, name }: ProductImage) => {
   const [hasError, setHasError] = useState(false)
 
   return (
@@ -12,7 +12,7 @@ const CarouselImage = ({ url, alt }: CarouselImageProps) => {
       ) : (
         <img
           src={url}
-          alt={alt}
+          alt={name}
           className="w-full h-64 object-cover"
           onError={() => setHasError(true)}
         />

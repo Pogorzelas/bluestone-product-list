@@ -1,6 +1,6 @@
 import type { Product } from '@/components/product-list/product-list.types.ts'
 
-export const mockProduct: Product = {
+const mockProduct: Product = {
   name: 'Test Product',
   number: 'TEST-001',
   description: 'This is a test product description',
@@ -10,7 +10,7 @@ export const mockProduct: Product = {
   ],
 }
 
-export const mockProducts: Product[] = [
+const mockProducts: Product[] = [
   {
     name: 'Laptop',
     number: 'TECH-001',
@@ -24,3 +24,5 @@ export const mockProducts: Product[] = [
     images: [],
   },
 ]
+
+export { mockProduct, mockProducts }

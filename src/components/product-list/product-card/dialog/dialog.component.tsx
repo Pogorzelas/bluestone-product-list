@@ -1,8 +1,8 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import type { DialogProps } from '@/components/product-list/product-card/dialog/dialog.types.ts'
 
-const Dialog = ({ trigger, title, children, open, onOpenChange }: DialogProps) => (
-  <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+const Dialog = ({ trigger, title, children, isOpen, onOpenChange }: DialogProps) => (
+  <DialogPrimitive.Root open={isOpen} onOpenChange={onOpenChange}>
     <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
